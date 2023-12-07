@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.roommvvmcompose.data.UserDatabase
 import com.example.roommvvmcompose.data.dao.UserDao
+import com.example.roommvvmcompose.data.repository.UserRepository
+import com.example.roommvvmcompose.data.repository.UserRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,4 +29,10 @@ object RoomModule {
     @Provides
     @Singleton
     fun provideUserDao(userDatabase : UserDatabase) : UserDao = userDatabase.userDao()
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(
+        userDao: UserDao
+    ):UserRepository = UserRepositoryImpl(userDao)
 }
